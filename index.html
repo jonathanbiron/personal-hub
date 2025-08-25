@@ -13,20 +13,13 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              ink: "#0f172a",      /* slate-900-ish */
-              soft: "#f8f7f4",     /* warm paper */
-              sand: "#ece7dd",
-              accent: "#b48a3b",   /* quiet gold */
-            }
+            brand: { ink:"#0f172a", soft:"#f8f7f4", sand:"#ece7dd", accent:"#b48a3b" }
           },
           fontFamily: {
-            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-            serif: ["Georgia", "ui-serif", "serif"]
+            sans: ["Inter","ui-sans-serif","system-ui","sans-serif"],
+            serif: ["Georgia","ui-serif","serif"]
           },
-          boxShadow: {
-            subtle: "0 6px 24px rgba(15, 23, 42, .06)"
-          }
+          boxShadow: { subtle:"0 6px 24px rgba(15,23,42,.06)" }
         }
       }
     }
@@ -35,34 +28,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet"/>
 
-  <!-- React 18 + ReactDOM (UMD) + Babel for inline JSX -->
+  <!-- React 18 + ReactDOM (UMD) + Babel -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Add presets so JSX/modern syntax compiles -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
 <body class="bg-[radial-gradient(ellipse_at_top_right,rgba(180,138,59,.08),transparent_40%),radial-gradient(ellipse_at_bottom_left,rgba(12,10,8,.05),transparent_40%)] bg-brand-soft text-brand-ink">
   <div id="root"></div>
 
-  <script type="text/babel">
-    /* ---------- Config ---------- */
+  <!-- NOTE: data-presets added; also fixed SVG camelCase + React style objects -->
+  <script type="text/babel" data-presets="env,react">
     const LINKS = {
       thriveRSVP: "https://docs.google.com/forms/d/e/1FAIpQLSd2I41x4NUbS_1cE-7sTnQpb0k0rjUZK_LBhOJLmWB7sc3YjA/viewform?usp=header",
-      fridayInvite: "#",     // TODO: replace when you have a Friday Conversations link/form
-      realTeam: "#",         // TODO
-      ssbe: "#",             // TODO
-      initiative: "#",       // TODO
-      stilled: "#",          // TODO
-      presenterDoc: "#"      // TODO (for ?presenter=1 portal)
+      fridayInvite: "#", realTeam:"#", ssbe:"#", initiative:"#", stilled:"#", presenterDoc:"#"
     };
     const CONTACT_EMAIL = "hello@theinitiativeprojects.com";
 
-    /* ---------- Utilities ---------- */
     const normalizeE164 = (raw) => {
       const digits = (raw || "").replace(/\D+/g, "");
       if (digits.length === 11 && digits.startsWith("1")) return "+1" + digits.slice(1);
       if (digits.length === 10) return "+1" + digits;
-      return ""; // fallback if not US 10/11 digits
+      return "";
     };
     const formatDots = (raw) => {
       const d = (raw || "").replace(/\D+/g, "").slice(0,10);
@@ -72,33 +60,22 @@
     };
     const parseVCardText = (text) => {
       const lines = (text || "").split(/\r?\n/);
-      let fn = "", n = "", email = "", tel = "";
+      let fn="", n="", email="", tel="";
       for (const line of lines) {
-        const L = line.trim();
-        if (L.startsWith("FN:")) fn = L.slice(3).trim();
-        else if (L.startsWith("N:")) n = L.slice(2).trim();
-        else if (/^EMAIL/i.test(L)) email = L.split(":").slice(1).join(":").trim();
-        else if (/^TEL/i.test(L)) tel = L.split(":").slice(1).join(":").trim();
+        const L=line.trim();
+        if (L.startsWith("FN:")) fn=L.slice(3).trim();
+        else if (L.startsWith("N:")) n=L.slice(2).trim();
+        else if (/^EMAIL/i.test(L)) email=L.split(":").slice(1).join(":").trim();
+        else if (/^TEL/i.test(L)) tel=L.split(":").slice(1).join(":").trim();
       }
-      // Prefer FN; split N if needed
-      let first = "", last = "";
-      if (fn) {
-        const parts = fn.split(" ");
-        first = parts[0] || "";
-        last = parts.slice(1).join(" ");
-      } else if (n) {
-        const parts = n.split(";");
-        last = parts[0] || "";
-        first = parts[1] || "";
-      }
+      let first="", last="";
+      if (fn) { const p=fn.split(" "); first=p[0]||""; last=p.slice(1).join(" "); }
+      else if (n) { const p=n.split(";"); last=p[0]||""; first=p[1]||""; }
       return { first, last, email, tel };
     };
 
-    /* ---------- UI primitives ---------- */
     const Pill = ({children}) => (
-      <span className="inline-flex items-center rounded-full border border-brand-sand/80 bg-white/70 px-3 py-1 text-xs font-medium text-gray-700">
-        {children}
-      </span>
+      <span className="inline-flex items-center rounded-full border border-brand-sand/80 bg-white/70 px-3 py-1 text-xs font-medium text-gray-700">{children}</span>
     );
 
     const Section = ({title, blurb, children, defaultOpen=false}) => {
@@ -110,7 +87,9 @@
               <div className="text-lg md:text-xl font-semibold">{title}</div>
               {blurb && <div className="text-sm text-gray-600 mt-1">{blurb}</div>}
             </div>
-            <svg className={"h-5 w-5 text-gray-400 transition-transform " + (open ? "rotate-180" : "")} viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <svg className={"h-5 w-5 text-gray-400 transition-transform " + (open ? "rotate-180" : "")} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </button>
           {open && <div className="px-5 pb-5 md:px-6 md:pb-6">{children}</div>}
         </div>
@@ -121,141 +100,4 @@
       <div className="rounded-xl border border-brand-sand/80 p-4 md:p-5 bg-white shadow-subtle">
         <div className="flex items-center justify-between gap-3">
           <h4 className="text-base md:text-lg font-semibold">{title}</h4>
-          {href && <a href={href} target="_blank" rel="noreferrer" className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium hover:bg-gray-50">{cta}</a>}
-        </div>
-        <div className="mt-2 text-sm text-gray-700 leading-relaxed">{children}</div>
-      </div>
-    );
-
-    /* ---------- App ---------- */
-    function App() {
-      const [presenterMode, setPresenterMode] = React.useState(false);
-
-      // Contact intake
-      const [first, setFirst] = React.useState("");
-      const [last, setLast]   = React.useState("");
-      const [email, setEmail] = React.useState("");
-      const [phoneUI, setPhoneUI] = React.useState("");  // xxx.xxx.xxxx
-      const phoneE164 = normalizeE164(phoneUI);
-
-      // Notification prefs
-      const [notifEmail, setNotifEmail] = React.useState(true);
-      const [notifSMS, setNotifSMS]     = React.useState(false);
-      const [notifApp, setNotifApp]     = React.useState(false);
-
-      React.useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const isPresenter = ["1","true","yes"].includes((params.get("presenter") || "").toLowerCase());
-        setPresenterMode(isPresenter);
-      }, []);
-
-      const handleVCF = async (file) => {
-        if (!file) return;
-        const text = await file.text();
-        const { first: f, last: l, email: e, tel: t } = parseVCardText(text);
-        if (f) setFirst(f);
-        if (l) setLast(l);
-        if (e) setEmail(e);
-        if (t) setPhoneUI(formatDots(t));
-      };
-
-      const submitContact = () => {
-        // Require all fields
-        if (!first || !last || !email || !phoneE164) {
-          alert("Please complete First, Last, Email, and Mobile.");
-          return;
-        }
-        const subject = encodeURIComponent("New contact (hub)");
-        const body = encodeURIComponent(
-          `First: ${first}\nLast: ${last}\nEmail: ${email}\nPhone(e164): ${phoneE164}\nPhone(display): ${phoneUI}\nPrefs -> Email: ${notifEmail ? "yes" : "no"}, SMS: ${notifSMS ? "yes" : "no"}, App: ${notifApp ? "yes" : "no"}`
-        );
-        // MVP: mailto. Later we’ll POST to Sender / your API.
-        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-      };
-
-      const downloadVCard = () => {
-        const lines = [
-          "BEGIN:VCARD",
-          "VERSION:3.0",
-          "N:Biron;Jonathan;;;",
-          "FN:Jonathan Biron",
-          "ORG:The Initiative Projects",
-          "EMAIL:" + CONTACT_EMAIL,
-          "URL:https://go.theinitiativeprojects.com",
-          "END:VCARD"
-        ];
-        const blob = new Blob([lines.join("\n")], { type: "text/vcard" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url; a.download = "Jonathan_Biron.vcf";
-        document.body.appendChild(a); a.click(); a.remove();
-        URL.revokeObjectURL(url);
-      };
-
-      return (
-        <main className="min-h-screen">
-          <div className="mx-auto max-w-3xl px-4 py-8 md:py-12">
-
-            {/* Header */}
-            <header className="mb-6 md:mb-8 flex items-center gap-4">
-              <img src="headshot.jpg" alt="Headshot of Jonathan Biron" className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover ring-2 ring-brand-accent/20 bg-white"/>
-              <div>
-                <h1 className="text-2xl font-semibold tracking-tight" style="font-family: 'Playfair Display', serif;">Jonathan Biron</h1>
-                <p className="text-sm text-gray-700 mt-1">
-                  I build friendly on-ramps to connection and momentum—monthly Thrive potlucks, Friday Conversations, and hands-on projects.
-                  If we just met: hi 👋—this page is the easiest way to keep in touch and find what fits you.
-                </p>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  <Pill>Thrive Gatherings</Pill><Pill>Friday Conversations</Pill><Pill>REAL</Pill><Pill>SSBE</Pill><Pill>The Initiative</Pill><Pill>Stilled</Pill>
-                </div>
-              </div>
-            </header>
-
-            {/* Quick actions */}
-            <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <button onClick={downloadVCard} className="rounded-2xl bg-white border border-brand-sand/80 px-4 py-3 text-left hover:shadow-subtle transition flex items-center justify-between">
-                <div>
-                  <div className="font-semibold">Save my contact</div>
-                  <div className="text-xs text-gray-600">Download vCard</div>
-                </div>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-brand-accent"><path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"/></svg>
-              </button>
-
-              <a href={LINKS.thriveRSVP} target="_blank" rel="noreferrer" className="rounded-2xl bg-brand-ink text-white px-4 py-3 text-center font-semibold hover:opacity-95 transition">
-                RSVP: Next Thrive
-              </a>
-
-              <a href={LINKS.fridayInvite} target="_blank" rel="noreferrer" className="rounded-2xl bg-white border border-brand-sand/80 px-4 py-3 text-center font-semibold hover:shadow-subtle transition">
-                Friday Conversations
-              </a>
-            </div>
-
-            {/* Initiatives — moved above sign-up */}
-            <div className="space-y-4 mb-6">
-              <Section title="Thrive Gatherings" blurb="Monthly potluck with playful themes—easy on-ramps to connection.">
-                <Card title="This month’s invite" cta="RSVP" href={LINKS.thriveRSVP}>
-                  Surf & Turf, Sunday Aug 31, 4–7pm. A simple night to meet good people. Bring a dish if you’d like—low-pressure, high-friendliness.
-                </Card>
-              </Section>
-
-              <Section title="Friday Conversations" blurb="A weekly, welcoming conversation—curiosity over consensus.">
-                <Card title="Join us" cta="Details" href={LINKS.fridayInvite}>
-                  A short spark, then an open, generous conversation. Come as you are; leave a little more thoughtful than you arrived.
-                </Card>
-              </Section>
-
-              <Section title="REAL (Real Estate)" blurb="Thoughtful, service-first help buying, selling, and settling in.">
-                <Card title="Work with our team" cta="Explore" href={LINKS.realTeam}>
-                  Updates, listings, and guidance without the hype.
-                </Card>
-              </Section>
-
-              <Section title="SSBE" blurb="Small steps, big effects—practical experiments that add up.">
-                <Card title="Start here" cta="Explore" href={LINKS.ssbe}>
-                  A tiny nudge, a lighter day. Simple practices that stick.
-                </Card>
-              </Section>
-
-              <Section title="The Initiative" blurb="An umbrella for experiments, essays, and gatherings—building in public.">
-                <Card title="What is it?" cta="Explore" href={LINKS.initiative}>
-                  We try things, share what we lea
+          {href &
