@@ -3,34 +3,20 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jonathan Biron — We build quiet rhythms</title>
+<title>Jonathan Biron — Quiet rhythms, real momentum</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
-
 <style>
   :root{
-    /* Dark canvas + warm ember accent */
-    --bg1:#0b0c11;            /* near-black */
-    --bg2:#121836;            /* indigo */
-    --ink:#e9edf3;            /* main text */
-    --muted:#a7b0bf;          /* secondary */
-    --line:#2a2f48;           /* hairline */
-    --glass:rgba(20,24,40,.55);
-    --glass-strong:rgba(20,24,40,.72);
-    --ember:#ff8a3d;
-    --ember-2:#ffcaa6;
-    --ok:#22c58b;
-    --err:#ef4444;
-
-    --radius:18px;
-    --radius-lg:26px;
-    --shadow-1:0 10px 30px rgba(0,0,0,.35);
-    --shadow-2:0 30px 80px rgba(0,0,0,.45);
-    --max:1160px;
+    --bg1:#0b0c11; --bg2:#121836;
+    --ink:#e9edf3; --muted:#a7b0bf;
+    --ember:#ff8a3d; --ok:#22c58b; --err:#ef4444;
+    --line:#262b46; --max:1160px;
   }
-
-  *{box-sizing:border-box} html,body{height:100%} body{margin:0;
-    font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);
+  *{box-sizing:border-box} html,body{height:100%}
+  body{
+    margin:0; color:var(--ink);
+    font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
     background:
       radial-gradient(90vw 70vh at 70% -10%, #1b1f4a 0%, transparent 60%),
       radial-gradient(70vw 60vh at -10% 20%, #101428 0%, transparent 55%),
@@ -39,107 +25,99 @@
     -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
   }
   a{color:var(--ember);text-decoration:none}
-  .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 80px}
+  .wrap{max-width:var(--max);margin:0 auto;padding:20px 18px 80px}
 
-  /* Progress bar */
-  .progress{position:fixed;inset:0 auto auto 0;height:3px;width:0;background:linear-gradient(90deg,var(--ember),#ff9966);z-index:1000}
+  /* Top progress */
+  .progress{position:fixed;left:0;top:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--ember),#ff9966);z-index:1000}
 
-  /* Sticky section nav */
+  /* Sticky nav (light, borderless) */
   .nav{
-    position:sticky; top:10px; z-index:900; margin-bottom:14px;
-    backdrop-filter:blur(9px) saturate(120%);
-    background:linear-gradient(180deg, var(--glass), transparent);
-    border:1px solid var(--line); border-radius:999px; padding:8px 12px;
-    display:flex; gap:12px; flex-wrap:wrap; align-items:center; box-shadow:var(--shadow-1);
+    position:sticky;top:10px;z-index:900;margin:0 0 10px;
+    display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+    backdrop-filter:blur(8px) saturate(120%);
+    background:linear-gradient(180deg, rgba(255,255,255,.05), transparent);
+    border-radius:999px;padding:8px 10px;
   }
   .nav a{
-    color:var(--muted); font-weight:600; font-size:13px; padding:6px 10px; border-radius:999px;
-    border:1px solid transparent; transition:color .2s ease, background .2s ease, border-color .2s ease;
+    color:#cfd6e9;font-weight:600;font-size:13px;padding:6px 10px;border-radius:999px;
+    transition:background .2s ease,color .2s ease;
   }
-  .nav a.active{color:#0e1016;background:#fff;border-color:#e8e8ee}
-  .spacer{height:4px} /* tiny gap under nav */
+  .nav a.active{background:#ffffff; color:#0e1016}
 
-  /* Hero */
+  /* Hero (borderless) */
   .hero{
-    border-radius:var(--radius-lg); overflow:hidden; padding:28px; display:grid; gap:20px;
-    grid-template-columns:1.4fr .9fr; align-items:center; border:1px solid var(--line);
+    display:grid;grid-template-columns:1.4fr .9fr;gap:22px;align-items:center;
+    padding:28px;border-radius:26px;
     background:
       radial-gradient(600px 260px at 0% -10%, rgba(255,138,61,.18), transparent 60%),
-      radial-gradient(600px 240px at 110% 10%, rgba(126,160,255,.18), transparent 60%),
-      linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-    box-shadow:var(--shadow-2); backdrop-filter:blur(8px) saturate(130%);
+      radial-gradient(600px 240px at 110% 10%, rgba(126,160,255,.16), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.06);
   }
-  .hero h1{font-family:"Plus Jakarta Sans",Inter,sans-serif;margin:0 0 10px;font-size:40px;line-height:1.08;letter-spacing:.2px}
+  .hero h1{font-family:"Plus Jakarta Sans",Inter,sans-serif;margin:0 0 10px;font-size:40px;line-height:1.08}
   .hero p{color:var(--muted);margin:0 0 12px;line-height:1.6}
   .headshot{
     width:280px;height:280px;border-radius:22px;object-fit:cover;justify-self:end;
     border:4px solid rgba(255,255,255,.9); box-shadow:0 16px 50px rgba(0,0,0,.45); background:#fff;
   }
-  .btn{
-    appearance:none; border:0; cursor:pointer; border-radius:14px; padding:14px 18px;
-    font-weight:800; letter-spacing:.2px; display:inline-flex; align-items:center; gap:10px;
-    transition:transform .04s ease, filter .2s ease, box-shadow .2s ease;
-  }
-  .btn:active{transform:translateY(1px)}
-  .btn.primary{color:#1a0f08;background:linear-gradient(135deg,var(--ember),#ff7a26); box-shadow:0 10px 24px rgba(255,122,38,.28)}
-  .btn.ghost{color:var(--ink); background:transparent; border:1px solid var(--ember)}
-
+  .btn{appearance:none;border:0;cursor:pointer;border-radius:14px;padding:14px 18px;
+    font-weight:800;letter-spacing:.2px;display:inline-flex;align-items:center;gap:10px}
+  .btn.primary{color:#1a0f08;background:linear-gradient(135deg,var(--ember),#ff7a26)}
+  .btn.ghost{color:var(--ink);background:transparent;border:1px solid var(--ember)}
   .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
 
-  /* Headline with glow spans */
-  .headline{margin:28px 0 6px; font-family:"Plus Jakarta Sans",Inter,sans-serif;font-weight:800;font-size:46px;line-height:1.12}
-  .subhead{color:var(--muted);max-width:70ch;margin:0 0 18px}
+  /* Big headline + glow words */
+  .headline{margin:28px 0 6px;font-family:"Plus Jakarta Sans",Inter,sans-serif;font-weight:800;font-size:46px;line-height:1.12}
+  .subhead{color:var(--muted);max-width:70ch;margin:0 0 22px}
   .spark{
     background-image:radial-gradient(60% 200% at 20% 50%, #ffffff 0%, #b6c2ff 40%, #7ea0ff 70%, var(--ember) 100%);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    filter:saturate(.4) brightness(.8); text-shadow:0 0 0 transparent; transition:filter .5s ease, text-shadow .5s ease;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:saturate(.4) brightness(.8);text-shadow:0 0 0 transparent;
+    transition:filter .5s ease, text-shadow .5s ease;
   }
-  .spark.is-active{filter:saturate(1) brightness(1.15); text-shadow:0 0 24px rgba(255,138,61,.25), 0 0 40px rgba(126,160,255,.18)}
+  .spark.is-active{filter:saturate(1) brightness(1.15);text-shadow:0 0 24px rgba(255,138,61,.25), 0 0 40px rgba(126,160,255,.18)}
 
-  /* Section blocks */
-  section{scroll-margin-top:86px} /* nice offset when using nav */
-  .band{
-    margin:18px 0; padding:22px; border-radius:var(--radius); border:1px solid var(--line);
-    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-    backdrop-filter:blur(8px) saturate(130%); box-shadow:var(--shadow-1);
+  /* Borderless sections */
+  section{scroll-margin-top:86px; position:relative; margin:64px 0 0}
+  section .inner{max-width:900px}
+  /* ambient accent behind each section (borderless feel) */
+  section::before{
+    content:""; position:absolute; inset:-40px -80px -40px -80px; z-index:-1;
+    background:
+      radial-gradient(600px 120px at 10% 0%, rgba(255,138,61,.08), transparent 60%),
+      radial-gradient(600px 140px at 90% 100%, rgba(126,160,255,.08), transparent 60%);
+    opacity:.8; pointer-events:none;
   }
-  .band h2{margin:0 0 10px; font-family:"Plus Jakarta Sans",Inter,sans-serif; font-size:28px}
-  .band p{margin:0 0 10px; color:var(--ink); opacity:.9}
+  /* remove borders / boxes entirely */
+  .band, .band *{box-shadow:none}
+  .band{padding:0;border:0;background:transparent}
+
+  /* two-column rows → single, airy */
+  .row{display:block}
   .kicker{color:var(--muted);font-size:14px}
 
-  /* abstract “image” strips (SVG topo / noise) */
-  .img{
-    height:120px; border-radius:14px; overflow:hidden; border:1px solid var(--line); margin-top:10px;
-    background:
-      radial-gradient(500px 140px at 80% -10%, rgba(255,138,61,.18), transparent 65%),
-      radial-gradient(400px 200px at -10% 110%, rgba(126,160,255,.16), transparent 60%),
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width=\"800\" height=\"200\" viewBox=\"0 0 800 200\"><defs><linearGradient id=\"g\" x1=\"0\" x2=\"0\" y1=\"0\" y2=\"1\"><stop offset=\"0%\" stop-color=\"%23ffffff\" stop-opacity=\"0.05\"/><stop offset=\"100%\" stop-color=\"%23ffffff\" stop-opacity=\"0.02\"/></linearGradient></defs><path d=\"M0 120 C 100 100, 200 140, 300 120 S 500 140, 600 120 S 700 100, 800 120\" stroke=\"url(%23g)\" stroke-width=\"1.2\" fill=\"none\"/><path d=\"M0 160 C 120 150, 220 180, 320 160 S 520 180, 640 160 S 720 150, 800 160\" stroke=\"url(%23g)\" stroke-width=\"1\" fill=\"none\"/></svg>') center/cover no-repeat;
-  }
-
-  /* Grid rows */
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  @media (max-width:960px){ .hero{grid-template-columns:1fr;}.headshot{justify-self:start;width:220px;height:220px}.headline{font-size:36px}.row{grid-template-columns:1fr} }
-
   /* Form */
-  .form{margin-top:8px}
-  .field{display:flex;flex-direction:column;gap:6px}
+  .form{margin-top:12px;max-width:760px}
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:960px){ .hero{grid-template-columns:1fr}.headshot{justify-self:start;width:220px;height:220px}.headline{font-size:36px}.fields{grid-template-columns:1fr}}
   label{font-weight:700;font-size:13px;color:#d7deea}
   input,select{
     border-radius:12px;border:1px solid var(--line);padding:12px 12px;background:#0f1326;color:var(--ink);outline:none;
   }
   input::placeholder{color:#8d96aa}
   input:focus,select:focus{box-shadow:0 0 0 3px rgba(255,138,61,.22);border-color:#e8c9b7}
-
   .checks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
   .tiny{font-size:12px;color:var(--muted);margin-top:6px}
-
   .alert{margin-top:12px;border-radius:12px;padding:12px 14px;font-size:14px;border:1px solid}
   .ok{background:#0f1f1a;border-color:#114d3b;color:#86f3c3}
   .err{background:#2a1616;border-color:#5d2a2a;color:#ffb0b0}
 
   /* Footer */
   footer{margin:26px 0 0;text-align:center;color:#c2c9d8}
-  footer .bar{display:inline-block;border:1px solid var(--line);background:var(--glass);border-radius:999px;padding:10px 14px}
+  footer .bar{display:inline-block;border:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border-radius:999px;padding:10px 14px}
 </style>
 </head>
 <body>
@@ -158,11 +136,10 @@
     <a href="#stilled">Stilled</a>
     <a href="#contact">Contact</a>
   </nav>
-  <div class="spacer"></div>
 
-  <!-- HERO / ABOUT -->
+  <!-- HERO -->
   <section id="about" class="hero">
-    <div>
+    <div class="inner">
       <h1>Jonathan Biron</h1>
       <p>We convene neighbors, founders, and friends around the table—shared meals, real conversations, and practical action.</p>
       <div class="btn-row">
@@ -173,175 +150,140 @@
     <img class="headshot" src="headshot.jpg" alt="Headshot of Jonathan Biron" />
   </section>
 
+  <!-- Big headline -->
   <h2 class="headline">
     Meet people who make life <span class="spark">fuller</span>. Build simple <span class="spark">rhythms</span>. Take the next <span class="spark">step</span>.
   </h2>
   <p class="subhead">Scroll to explore; each section lights up what matters right now.</p>
 
-  <!-- CONVERSATIONS (umbrella) -->
-  <section id="conversations" class="band">
-    <h2>Conversations</h2>
-    <div class="row">
-      <div>
-        <p>We host thoughtful conversations for <span class="spark">business owners</span> and builders. We swap notes, find <span class="spark">clarity</span>, and build <span class="spark">momentum</span>.</p>
-        <p class="kicker">Live, small-group format • frameworks that travel • light accountability</p>
-        <div class="btn-row" style="margin-top:10px">
-          <button class="btn primary js-interest" data-interest="conversations_interest">Join the list</button>
-        </div>
+  <!-- CONVERSATIONS -->
+  <section id="conversations" class="band" data-spark>
+    <div class="inner">
+      <h2>Conversations</h2>
+      <p>We host thoughtful conversations for <span class="spark">business owners</span> and builders. We swap notes, find <span class="spark">clarity</span>, and build <span class="spark">momentum</span>.</p>
+      <p class="kicker">Live, small-group format • frameworks that travel • light accountability</p>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn primary js-interest" data-interest="conversations_interest">Join the list</button>
       </div>
-      <div class="img" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- FRIDAY CONVERSATIONS -->
-  <section id="friday" class="band">
-    <h2>Friday Conversations</h2>
-    <div class="row">
-      <div>
-        <p>Every Friday, a focused hour for founders—<span class="spark">weekly</span>, <span class="spark">practical</span>, and <span class="spark">peer-led</span>. Leave with one next step.</p>
-        <div class="btn-row" style="margin-top:10px">
-          <button class="btn primary js-interest" data-interest="friday_reminders">Get Friday reminders</button>
-        </div>
+  <!-- FRIDAY -->
+  <section id="friday" class="band" data-spark>
+    <div class="inner">
+      <h2>Friday Conversations</h2>
+      <p>Every Friday, a focused hour for founders—<span class="spark">weekly</span>, <span class="spark">practical</span>, and <span class="spark">peer-led</span>. Leave with one next step.</p>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn primary js-interest" data-interest="friday_reminders">Get Friday reminders</button>
       </div>
-      <div class="img" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- THRIVE GATHERINGS -->
-  <section id="thrive" class="band">
-    <h2>Thrive Gatherings</h2>
-    <div class="row">
-      <div>
-        <p>Monthly shared-table dinners that turn <span class="spark">neighbors</span> into friends—designed for <span class="spark">belonging</span> and real <span class="spark">friendship</span>.</p>
-        <p class="kicker">Think “family-style” — bring-and-share, simple, welcoming.</p>
-        <div class="btn-row" style="margin-top:10px">
-          <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSd2I41x4NUbS_1cE-7sTnQpb0k0rjUZK_LBhOJLmWB7sc3YjA/viewform?usp=header" target="_blank" rel="noopener">Next RSVP</a>
-          <button class="btn ghost js-interest" data-interest="thrive_invites">Invite me to future dinners</button>
-        </div>
+  <!-- THRIVE -->
+  <section id="thrive" class="band" data-spark>
+    <div class="inner">
+      <h2>Thrive Gatherings</h2>
+      <p>Monthly shared-table dinners that turn <span class="spark">neighbors</span> into friends—designed for <span class="spark">belonging</span> and real <span class="spark">friendship</span>.</p>
+      <p class="kicker">Think “family-style” — bring-and-share, simple, welcoming.</p>
+      <div class="btn-row" style="margin-top:10px">
+        <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSd2I41x4NUbS_1cE-7sTnQpb0k0rjUZK_LBhOJLmWB7sc3YjA/viewform?usp=header" target="_blank" rel="noopener">Next RSVP</a>
+        <button class="btn ghost js-interest" data-interest="thrive_invites">Invite me to future dinners</button>
       </div>
-      <div class="img" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- THE INITIATIVE -->
-  <section id="initiative" class="band">
-    <h2>The Initiative</h2>
-    <div class="row">
-      <div>
-        <p>A small circle building <span class="spark">experiments</span> that move people from ideas to action—quietly, <span class="spark">together</span>. Roles flex; credit is shared; the work matters more than the spotlight.</p>
-        <div class="btn-row" style="margin-top:10px">
-          <button class="btn primary js-interest" data-interest="updates">I’m curious</button>
-        </div>
+  <!-- INITIATIVE -->
+  <section id="initiative" class="band" data-spark>
+    <div class="inner">
+      <h2>The Initiative</h2>
+      <p>A small circle building <span class="spark">experiments</span> that move people from ideas to action—quietly, <span class="spark">together</span>. Roles flex; credit is shared.</p>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn primary js-interest" data-interest="updates">I’m curious</button>
       </div>
-      <div class="img" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- CREEK AT THE CROSSROADS -->
-  <section id="creek" class="band">
-    <h2>Creek at the Crossroads</h2>
-    <div class="row">
-      <div>
-        <p>Our <span class="spark">place</span> at the bend of the creek—where business meets nature meets spirituality. Land to gather, a shop to build in, space to <span class="spark">practice</span>. Sometimes home; sometimes the road—the <span class="spark">intersection</span> of our threads.</p>
-        <div class="btn-row" style="margin-top:10px">
-          <button class="btn primary js-interest" data-interest="creek_updates">Keep me posted</button>
-        </div>
+  <!-- CREEK -->
+  <section id="creek" class="band" data-spark>
+    <div class="inner">
+      <h2>Creek at the Crossroads</h2>
+      <p>Our <span class="spark">place</span> at the bend of the creek—where business meets nature meets spirituality. Land to gather, a shop to build in, space to <span class="spark">practice</span>. The <span class="spark">intersection</span> of our threads.</p>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn primary js-interest" data-interest="creek_updates">Keep me posted</button>
       </div>
-      <div class="img" aria-hidden="true"></div>
     </div>
   </section>
 
   <!-- STILLED -->
-  <section id="stilled" class="band">
-    <h2>Stilled</h2>
-    <div class="row">
-      <div>
-        <p>Simple practices to <span class="spark">slow</span> the hurry, <span class="spark">notice</span> what matters, and <span class="spark">renew</span> together.</p>
-        <div class="btn-row" style="margin-top:10px">
-          <button class="btn primary js-interest" data-interest="updates">Send a practice now and then</button>
-        </div>
+  <section id="stilled" class="band" data-spark>
+    <div class="inner">
+      <h2>Stilled</h2>
+      <p>Simple practices to <span class="spark">slow</span> the hurry, <span class="spark">notice</span> what matters, and <span class="spark">renew</span> together.</p>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn primary js-interest" data-interest="updates">Send a practice now and then</button>
       </div>
-      <div class="img" aria-hidden="true"></div>
     </div>
   </section>
 
-  <!-- CONTACT / PREFERENCES -->
+  <!-- CONTACT -->
   <section id="contact" class="band">
-    <h2>Stay in touch</h2>
-    <p class="kicker">Share your info and choose what you want to hear about. You can change this anytime.</p>
+    <div class="inner">
+      <h2>Stay in touch</h2>
+      <p class="kicker">Share your info and choose what you want to hear about. You can change this anytime.</p>
+      <form id="mainForm" class="form">
+        <div class="fields">
+          <div><label for="first">First name</label><input id="first" name="first" required></div>
+          <div><label for="last">Last name</label><input id="last" name="last" required></div>
+        </div>
+        <div class="fields">
+          <div><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+          <div><label for="phone">Mobile (US)</label><input id="phone" name="phone" inputmode="tel" placeholder="(509) 555-1212" required><div class="tiny">We may text if you choose SMS. Reply STOP to opt out.</div></div>
+        </div>
 
-    <form id="mainForm" class="form">
-      <div class="row">
-        <div class="field">
-          <label for="first">First name</label>
-          <input id="first" name="first" autocomplete="given-name" required />
+        <div class="checks">
+          <label><input type="checkbox" name="conversations_interest"> Conversations (umbrella)</label>
+          <label><input type="checkbox" name="friday_reminders"> Friday reminders</label>
+          <label><input type="checkbox" name="thrive_invites"> Thrive invites</label>
+          <label><input type="checkbox" name="updates"> Occasional updates</label>
+          <label><input type="checkbox" name="creek_updates"> Creek happenings</label>
+          <label><input type="checkbox" name="real_insights"> Real-estate insights</label>
         </div>
-        <div class="field">
-          <label for="last">Last name</label>
-          <input id="last" name="last" autocomplete="family-name" required />
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required />
-        </div>
-        <div class="field">
-          <label for="phone">Mobile (US)</label>
-          <input id="phone" name="phone" inputmode="tel" placeholder="(509) 555-1212" required />
-          <div class="tiny">We may text if you choose SMS. Reply STOP to opt out.</div>
-        </div>
-      </div>
 
-      <div class="checks">
-        <label><input type="checkbox" name="conversations_interest" /> Conversations (umbrella)</label>
-        <label><input type="checkbox" name="friday_reminders" /> Friday reminders</label>
-        <label><input type="checkbox" name="thrive_invites" /> Thrive invites</label>
-        <label><input type="checkbox" name="updates" /> Occasional updates</label>
-        <label><input type="checkbox" name="creek_updates" /> Creek at the Crossroads</label>
-        <label><input type="checkbox" name="real_insights" /> Real-estate insights</label>
-      </div>
-
-      <div class="row" style="margin-top:8px">
-        <div class="field">
-          <label for="freq">How often?</label>
-          <select id="freq" name="frequency">
-            <option value="invites_only">Only invites</option>
-            <option value="monthly">Monthly digest</option>
-            <option value="weekly">Weekly</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>How should we reach you?</label>
-          <div class="checks" style="grid-template-columns:repeat(3,1fr)">
-            <label><input type="checkbox" name="channel_email" /> Email</label>
-            <label><input type="checkbox" name="channel_sms" /> SMS</label>
-            <label><input type="checkbox" name="channel_app" /> App (soon)</label>
+        <div class="fields" style="margin-top:8px">
+          <div>
+            <label for="freq">How often?</label>
+            <select id="freq" name="frequency">
+              <option value="invites_only">Only invites</option>
+              <option value="monthly">Monthly digest</option>
+              <option value="weekly">Weekly</option>
+            </select>
+          </div>
+          <div>
+            <label>How should we reach you?</label>
+            <div class="checks" style="grid-template-columns:repeat(3,1fr)">
+              <label><input type="checkbox" name="channel_email"> Email</label>
+              <label><input type="checkbox" name="channel_sms"> SMS</label>
+              <label><input type="checkbox" name="channel_app"> App (soon)</label>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="btn-row" style="margin-top:12px">
-        <button class="btn primary" type="submit">Save</button>
-      </div>
-
-      <!-- Honeypot -->
-      <input type="text" id="company" name="company" style="display:none" autocomplete="off" />
-      <div id="msg"></div>
-    </form>
+        <div class="btn-row" style="margin-top:12px"><button class="btn primary" type="submit">Save</button></div>
+        <input type="text" id="company" name="company" style="display:none" autocomplete="off">
+        <div id="msg"></div>
+      </form>
+    </div>
   </section>
 
   <footer>
     <div class="bar">Jonathan Biron | The Initiative | Creek at the Crossroads | Stilled | Friday Conversations</div>
   </footer>
-
 </div>
 
 <script>
-  /* === Replace with your real secret === */
   const FORM_SECRET = 'REPLACE_WITH_FORM_SECRET';
 
-  /* Scroll progress */
+  /* Progress bar */
   const prog = document.getElementById('progress');
   const setProgress = () => {
     const h = document.documentElement;
@@ -351,18 +293,10 @@
   };
   document.addEventListener('scroll', setProgress, {passive:true}); setProgress();
 
-  /* Glow-on-scroll words */
-  const sparks = [...document.querySelectorAll('.spark')];
-  const sparkObs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if (e.isIntersecting) e.target.classList.add('is-active'); });
-  }, { rootMargin:'-10% 0px -10% 0px', threshold:.6 });
-  sparks.forEach(s=>sparkObs.observe(s));
-
-  /* Sticky nav: activate current link + smooth scroll */
+  /* Sticky nav highlight */
   const nav = document.getElementById('nav');
   const links = [...nav.querySelectorAll('a')];
   const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-
   const spy = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
@@ -372,90 +306,80 @@
     });
   }, {rootMargin:'-45% 0px -45% 0px', threshold:0.01});
   sections.forEach(sec => spy.observe(sec));
-
   links.forEach(a=>{
-    a.addEventListener('click',(e)=>{
-      e.preventDefault();
-      const id = a.getAttribute('href');
-      document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'});
-    });
+    a.addEventListener('click',(e)=>{ e.preventDefault(); document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'}) });
   });
 
-  /* Interest CTAs: pre-check a box and jump down to contact */
-  const interestButtons = document.querySelectorAll('.js-interest');
-  interestButtons.forEach(btn=>{
+  /* Glow words: sequential "wave" per section */
+  function waveSparks(scope){
+    const words = [...scope.querySelectorAll('.spark')];
+    words.forEach(w => w.classList.remove('is-active'));
+    words.forEach((w, i) => { setTimeout(()=> w.classList.add('is-active'), i*180); });
+  }
+  // hero headline wave on load
+  waveSparks(document);
+
+  // re-wave when section enters view
+  const waveObs = new IntersectionObserver((ents)=>{
+    ents.forEach(e=>{
+      if(e.isIntersecting){ waveSparks(e.target); }
+    });
+  }, {rootMargin:'-20% 0px -20% 0px', threshold:.4});
+  document.querySelectorAll('[data-spark]').forEach(sec => waveObs.observe(sec));
+
+  /* CTA buttons: precheck interest and jump to contact */
+  document.querySelectorAll('.js-interest').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const name = btn.getAttribute('data-interest');
       const cb = document.querySelector(`input[name="${name}"]`);
-      if (cb) { cb.checked = true; }
+      if (cb) cb.checked = true;
       document.querySelector('#contact')?.scrollIntoView({behavior:'smooth', block:'start'});
-      // brief highlight
-      document.querySelector('#contact').style.boxShadow = '0 0 0 3px rgba(255,138,61,.35)';
-      setTimeout(()=>{ document.querySelector('#contact').style.boxShadow = ''; }, 900);
     });
   });
 
-  /* Helper to collect payload */
-  function collectPayload(includePrefs=true){
-    const f = document.getElementById('mainForm');
-    const channels = [];
+  /* Form submit */
+  const form = document.getElementById('mainForm');
+  const msg  = document.getElementById('msg');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const f = form;
+    const channels=[];
     if (f.querySelector('input[name="channel_email"]').checked) channels.push('email');
     if (f.querySelector('input[name="channel_sms"]').checked) channels.push('sms');
     if (f.querySelector('input[name="channel_app"]').checked) channels.push('app');
 
-    const prefs = includePrefs ? {
-      conversations_interest: f.querySelector('input[name="conversations_interest"]').checked,
-      friday_reminders:       f.querySelector('input[name="friday_reminders"]').checked,
-      thrive_invites:         f.querySelector('input[name="thrive_invites"]').checked,
-      updates:                f.querySelector('input[name="updates"]').checked,
-      creek_updates:          f.querySelector('input[name="creek_updates"]').checked,
-      real_insights:          f.querySelector('input[name="real_insights"]').checked,
-      frequency:              f.querySelector('select[name="frequency"]').value,
-      channels
-    } : undefined;
-
-    return {
+    const payload = {
       first:  f.querySelector('#first').value.trim(),
       last:   f.querySelector('#last').value.trim(),
       email:  f.querySelector('#email').value.trim(),
       phone:  f.querySelector('#phone').value.trim(),
       honeypot: f.querySelector('#company').value || '',
       source: 'hub',
-      prefs
+      prefs: {
+        conversations_interest: f.querySelector('input[name="conversations_interest"]').checked,
+        friday_reminders:       f.querySelector('input[name="friday_reminders"]').checked,
+        thrive_invites:         f.querySelector('input[name="thrive_invites"]').checked,
+        updates:                f.querySelector('input[name="updates"]').checked,
+        creek_updates:          f.querySelector('input[name="creek_updates"]').checked,
+        real_insights:          f.querySelector('input[name="real_insights"]').checked,
+        frequency:              f.querySelector('select[name="frequency"]').value,
+        channels
+      }
     };
-  }
 
-  /* Form submit → /api/submit */
-  const form = document.getElementById('mainForm');
-  const msg  = document.getElementById('msg');
-  form.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    const payload = collectPayload(true);
-    const buttons = form.querySelectorAll('button[type="submit"]'); buttons.forEach(b=>b.disabled=true);
-    msg.innerHTML = '';
     const out = (html, cls) => { msg.innerHTML = `<div class="alert ${cls}">${html}</div>`; };
-
     try{
-      const res = await fetch('/api/submit', {
+      const res = await fetch('/api/submit',{
         method:'POST',
-        headers:{ 'Content-Type':'application/json', 'X-Form-Secret': FORM_SECRET },
-        body: JSON.stringify(payload)
+        headers:{'Content-Type':'application/json','X-Form-Secret':FORM_SECRET},
+        body:JSON.stringify(payload)
       });
       const data = await res.json().catch(()=>({}));
-      if(res.ok && data.ok){
-        out('Thanks—your info and preferences are saved.', 'ok');
-      }else if(res.status === 400){
-        out('Please fill in First, Last, Email, and a valid US mobile number.', 'err');
-      }else if(res.status === 401){
-        out('Auth error. Please refresh and try again.', 'err');
-      }else{
-        out('Something went wrong. Please try again.', 'err');
-      }
-    }catch(e){
-      out('Network error. Please try again.', 'err');
-    }finally{
-      buttons.forEach(b=>b.disabled=false);
-    }
+      if(res.ok && data.ok){ out('Thanks—your info and preferences are saved.', 'ok'); }
+      else if(res.status === 400){ out('Please fill in First, Last, Email, and a valid US mobile number.', 'err'); }
+      else if(res.status === 401){ out('Auth error. Please refresh and try again.', 'err'); }
+      else { out('Something went wrong. Please try again.', 'err'); }
+    }catch(err){ out('Network error. Please try again.', 'err'); }
   });
 </script>
 </body>
