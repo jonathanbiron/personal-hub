@@ -2,321 +2,238 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jonathan Biron — Welcome</title>
 
+  <!-- Type: Inter + a softer rounded display for headings -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Palette B with warm Ember accent */
-      --bg:#0f172a;         /* ink/indigo base for gradients */
-      --paper:#0b1220;      /* deeper backdrop */
-      --ink:#0b1220;
-      --text:#0e1a33;
-      --card:#ffffff;
-      --muted:#5b6472;
-      --line:#e8e8ee;
-
-      --ember:#e0713b;      /* primary accent */
-      --ember-2:#ff9a62;
-
-      --sand:#f6f3ee;       /* page base */
-      --glass:#ffffffcc;
+      /* Ember-ish accent on a dark canvas */
+      --bg-1:#0b0c11;        /* near-black */
+      --bg-2:#0f1230;        /* indigo undertone */
+      --ink:#e9edf3;         /* body text */
+      --muted:#a7b0bf;       /* secondary text */
+      --glass:#14182880;     /* card fill (50%) */
+      --glass-border:#2a2f48;/* subtle border */
+      --ember:#ff8a3d;       /* primary accent */
+      --ember-2:#ffd2b3;     /* warm highlight */
+      --success:#18c37e;
 
       --radius:18px;
-      --shadow-1:0 10px 30px rgba(15,23,42,.08);
-      --shadow-2:0 20px 60px rgba(15,23,42,.12);
-      --max:1200px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --ring:0 0 0 1px var(--glass-border) inset;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0}
+    html,body{height:100%}
     body{
-      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      color:#10233f;
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--ink);
       background:
-        radial-gradient(1200px 600px at 20% -10%, #fef9f5 0%, #f7efe8 40%, #f4efe8 60%, #f2eee7 100%),
-        radial-gradient(1000px 480px at 110% -20%, #ffe8db 0%, #f8efe8 55%, #f4efe8 100%);
+        radial-gradient(80vw 60vh at 70% -10%, #1b1f4a 0%, transparent 60%),
+        radial-gradient(60vw 50vh at -10% 20%, #101428 0%, transparent 55%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 60%);
       background-attachment: fixed;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    .container{max-width:var(--max);margin:0 auto;padding:32px 20px}
+    a{color:var(--ember);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
 
-    /* HERO */
+    /* header */
     .hero{
-      position:relative;
-      border-radius:28px;
-      overflow:hidden;
-      padding:48px 36px;
-      box-shadow:var(--shadow-2);
-      background:
-        radial-gradient(800px 360px at 0% -10%, rgba(224,113,59,.28), transparent 60%),
-        radial-gradient(700px 300px at 100% 10%, rgba(53,102,255,.20), transparent 60%),
-        linear-gradient(180deg,#ffffff,#faf8f6 60%, #f7f2ec);
-      border:1px solid #ece7df;
-    }
-    .hero-grid{display:grid;grid-template-columns:1.2fr .9fr;gap:28px;align-items:center}
-    .headshot{
-      width:280px;height:280px;border-radius:24px;object-fit:cover;
-      backdrop-filter:saturate(120%);
-      box-shadow:0 12px 40px rgba(16,35,63,.25);
-      border:4px solid rgba(255,255,255,.9);
-      background:#fff;
-      justify-self:end;
-    }
-    h1{font-family:Manrope,Inter,sans-serif;font-size:44px;line-height:1.08;letter-spacing:.2px;margin:0 0 12px}
-    .intro{font-size:18px;color:#30425d;line-height:1.65;margin:0 0 18px}
-
-    .btn{
-      appearance:none;border:0;cursor:pointer;
-      border-radius:14px;padding:14px 18px;font-weight:700;letter-spacing:.2px;
-      display:inline-flex;align-items:center;gap:10px;transition:transform .04s ease, box-shadow .2s ease, filter .2s ease;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn.primary{
-      color:#fff;background:linear-gradient(135deg,var(--ember),var(--ember-2));
-      box-shadow:0 10px 24px rgba(224,113,59,.28);
-    }
-    .btn.ghost{
-      color:#10233f;background:#fff;border:1px solid #eae6df;
-    }
-    .btn-row{display:flex;gap:12px;flex-wrap:wrap}
-
-    /* SECTION CARD (glass style) */
-    .glass{
-      background:rgba(255,255,255,.82);
-      border:1px solid #efe9e0;
+      display:flex;gap:20px;align-items:center;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)) ;
       border-radius:var(--radius);
-      box-shadow:var(--shadow-1);
-      backdrop-filter:saturate(140%) blur(6px);
-      padding:20px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--glass-border);
+      backdrop-filter: blur(6px);
     }
-    .section{margin-top:22px}
-    .section h2{font-family:Manrope,Inter,sans-serif;font-size:24px;margin:0 0 12px}
-    .muted{color:#59667a;font-size:14px}
-
-    /* FORM */
-    form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .field{display:flex;flex-direction:column}
-    label{font-weight:700;font-size:13px;margin:0 0 6px;color:#162c50}
-    input,select{
-      border:1px solid #e7e1d9;border-radius:12px;background:#fff;
-      padding:12px 12px;font-size:16px;outline:none;
+    .avatar{
+      width:84px;height:84px;border-radius:16px;overflow:hidden;flex:0 0 auto;
+      box-shadow:0 6px 18px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06);
     }
-    input:focus,select:focus{box-shadow:0 0 0 3px rgba(224,113,59,.18);border-color:#e8c9b7}
-
-    /* INITIATIVES */
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .card{border:1px solid #efe9e0;border-radius:16px;padding:16px;background:#fff}
-    .card h3{margin:0 0 6px;font-size:16px}
-    .card p{margin:0;color:#4b5870;font-size:15px;line-height:1.6}
-
-    /* NOTIFICATIONS */
-    .choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .tiny{font-size:12px;color:#6b778d;margin-top:6px}
-
-    /* ALERT */
-    .alert{margin-top:12px;border-radius:12px;padding:12px 14px;font-size:14px}
-    .ok{background:#eefcf4;border:1px solid #cfe9da;color:#155b3a}
-    .err{background:#fff3f1;border:1px solid #f2c9c2;color:#7c2b23}
-
-    /* FOOTER */
-    footer{margin:26px 0 50px;text-align:center;color:#57627a}
-    footer .bar{display:inline-block;border:1px solid #eee3d8;background:#fff;border-radius:999px;padding:10px 14px}
-
-    @media (max-width:1024px){
-      .hero-grid{grid-template-columns:1fr;gap:20px}
-      .headshot{justify-self:start;width:220px;height:220px}
+    .avatar img{display:block;width:100%;height:100%;object-fit:cover}
+    .hero h1{
+      font-family:"Plus Jakarta Sans", Inter, system-ui, sans-serif;
+      font-weight:700;letter-spacing:.2px;margin:0 0 6px;font-size:28px;
     }
-    @media (max-width:680px){
-      h1{font-size:36px}
-      .hero{padding:36px 18px}
-      form .row,.grid-2,.choices{grid-template-columns:1fr}
+    .kicker{color:var(--muted);line-height:1.5}
+
+    /* sparkling headline below header */
+    .headline{
+      margin:26px 0 14px;font-size:40px;line-height:1.15;
+      font-family:"Plus Jakarta Sans", Inter, sans-serif;font-weight:700;
+      letter-spacing:.2px;
     }
+    .spark{
+      background-image: radial-gradient(60% 200% at 20% 50%, #ffffff 0%, #b6c2ff 40%, #7ea0ff 70%, var(--ember) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:0 0 0 transparent;
+      filter:saturate(.4) brightness(.8);
+      transition:filter .5s ease, text-shadow .5s ease;
+    }
+    .spark.is-active{
+      filter:saturate(1) brightness(1.15);
+      text-shadow:0 0 20px rgba(255,138,61,.25), 0 0 36px rgba(126,160,255,.18);
+    }
+    .subhead{color:var(--muted);max-width:70ch}
+
+    /* cards */
+    .card{
+      margin-top:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--glass-border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    .card h2{margin:0 0 10px;font-size:22px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .row-3{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media (max-width:900px){ .row,.row-3{grid-template-columns:1fr} .headline{font-size:32px} }
+
+    input,button{
+      font:inherit;border-radius:12px;border:1px solid var(--glass-border);
+      padding:12px 14px;background-color:#0f1326;color:var(--ink);
+      outline:none;box-shadow:var(--ring);
+    }
+    input::placeholder{color:#8d96aa}
+    button{
+      background:linear-gradient(180deg, var(--ember) 0%, #ff7a26 100%);
+      color:#20160e;border:none;cursor:pointer;font-weight:700;
+      box-shadow:0 6px 18px rgba(255,122,38,.22);
+    }
+    button.secondary{
+      background:transparent;color:var(--ember);border:1px solid var(--ember);
+      box-shadow:none
+    }
+
+    .footer{margin:36px 0 0;opacity:.75;font-size:14px;text-align:center}
+    .tag{display:inline-block;font-size:12px;padding:4px 8px;border-radius:999px;background:#1a1f36;border:1px solid var(--glass-border);color:#cbd3e4}
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- HERO -->
+  <div class="wrap">
+    <!-- Top card -->
     <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <h1>Jonathan Biron</h1>
-          <p class="intro">
-            I host simple rhythms that make life feel fuller—shared meals, thoughtful conversations,
-            and practical steps. If we just met, hi 👋—start here and choose what you want to hear about.
-          </p>
-          <div class="btn-row">
-            <a class="btn primary" href="jonathan-biron.vcf" download>Save vCard</a>
-            <a class="btn ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSd2I41x4NUbS_1cE-7sTnQpb0k0rjUZK_LBhOJLmWB7sc3YjA/viewform?usp=header" target="_blank" rel="noopener">Next Thrive RSVP</a>
-          </div>
-        </div>
-        <img class="headshot" src="headshot.jpg" alt="Headshot of Jonathan Biron" />
+      <div class="avatar">
+        <!-- replace with your image path -->
+        <img src="/headshot.jpg" alt="Jonathan Biron">
+      </div>
+      <div>
+        <h1>Jonathan Biron</h1>
+        <p class="kicker">I host simple rhythms that make life feel fuller—shared meals, thoughtful conversations, and practical steps. If we just met, hi 👋—start here and choose what you want to hear about.</p>
       </div>
     </section>
 
-    <!-- CONTACT (glass card) -->
-    <section class="section glass">
+    <!-- Superhuman-like headline -->
+    <h2 class="headline">
+      Make <span class="spark">connections</span> that
+      <span class="spark">matter</span>—and keep the
+      <span class="spark">rhythms</span> that make life
+      <span class="spark">richer</span>.
+    </h2>
+    <p class="subhead">Quickly grab my contact, share yours, and explore what I’m working on—like <strong>Friday Conversations</strong> and <strong>Thrive Gatherings</strong>.</p>
+
+    <!-- Save my contact -->
+    <section class="card">
+      <h2>Save my contact</h2>
+      <div class="row">
+        <div>
+          <p class="kicker" style="margin:8px 0 10px">Add me to your phone so we can stay in touch easily.</p>
+          <a href="/jonathan-biron.vcf" download>
+            <button type="button">Save vCard</button>
+          </a>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;justify-content:flex-end">
+          <a href="https://forms.gle/YDDkWbwkq3puGeTG8" target="_blank" rel="noopener">
+            <button class="secondary" type="button">Next Thrive RSVP</button>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Let’s stay in touch (Supabase form) -->
+    <section class="card">
       <h2>Let’s stay in touch</h2>
-      <p class="muted">Share your info and we’ll keep the invites useful. You can choose preferences below.</p>
-      <form id="mainForm">
-        <div class="row" style="margin-top:8px">
-          <div class="field">
-            <label for="first">First name</label>
-            <input id="first" name="first" autocomplete="given-name" required>
-          </div>
-          <div class="field">
-            <label for="last">Last name</label>
-            <input id="last" name="last" autocomplete="family-name" required>
-          </div>
+      <form id="contact-form">
+        <div class="row">
+          <input name="first_name" placeholder="First name" required>
+          <input name="last_name" placeholder="Last name" required>
         </div>
         <div class="row">
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="phone">Mobile (US)</label>
-            <input id="phone" name="phone" inputmode="tel" placeholder="(509) 555-1212" required>
-            <div class="tiny">We may text if you choose SMS. Reply STOP to opt out.</div>
-          </div>
+          <input name="email" type="email" placeholder="Email" required>
+          <input name="phone" inputmode="tel" placeholder="Mobile (US)">
         </div>
-        <div class="btn-row" style="margin-top:12px">
-          <button class="btn primary" type="submit" data-action="contact">Send my contact</button>
+        <div style="display:flex;gap:12px;align-items:center;justify-content:flex-end;margin-top:10px">
+          <button id="send-btn" type="submit">Send my contact</button>
+          <span id="status" class="kicker" aria-live="polite"></span>
         </div>
-        <input type="text" id="company" name="company" style="display:none" autocomplete="off">
-        <div id="msg"></div>
       </form>
     </section>
 
-    <!-- WHAT I'M WORKING ON -->
-    <section class="section glass">
+    <!-- What I’m working on -->
+    <section class="card">
       <h2>What I’m working on</h2>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Thrive Gatherings</h3>
-          <p>Dinners that turn neighbors into friends. Monthly potluck with a theme and easy on-ramps.</p>
+      <div class="row-3">
+        <div>
+          <span class="tag">Friday Conversations</span>
+          <p style="margin:10px 0 0">Weekly, thoughtful conversations around growth, purpose, and practical action for business owners.</p>
         </div>
-        <div class="card">
-          <h3>Friday Conversations</h3>
-          <p>Weekly, thoughtful conversations around growth, purpose, and practical action.</p>
-        </div>
-        <div class="card">
-          <h3>The Initiative</h3>
-          <p>Umbrella for experiments that help people move from ideas to action—quietly and effectively.</p>
-        </div>
-        <div class="card">
-          <h3>Stilled</h3>
-          <p>Practices that slow the hurry so you can hear what matters.</p>
+        <div>
+          <span class="tag">Thrive Gatherings</span>
+          <p style="margin:10px 0 0">Monthly potluck with a fun theme and easy on-ramps. Meet neighbors; make friends.</p>
         </div>
       </div>
     </section>
 
-    <!-- NOTIFICATIONS -->
-    <section class="section glass">
-      <h2>Notifications</h2>
-      <div class="choices">
-        <div class="card">
-          <strong>What would you like?</strong>
-          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <label><input type="checkbox" name="thrive_invites"> Thrive invites</label>
-            <label><input type="checkbox" name="friday_reminders"> Friday reminders</label>
-            <label><input type="checkbox" name="updates"> Occasional updates</label>
-            <label><input type="checkbox" name="real_insights"> Real estate insights</label>
-          </div>
-        </div>
-        <div class="card">
-          <strong>How often?</strong>
-          <div style="margin-top:10px">
-            <select name="frequency">
-              <option value="invites_only">Only invites</option>
-              <option value="monthly">Monthly digest</option>
-              <option value="weekly">Weekly</option>
-            </select>
-          </div>
-          <div style="margin-top:14px">
-            <strong>How should we reach you?</strong>
-            <div style="margin-top:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-              <label><input type="checkbox" name="channel_email"> Email</label>
-              <label><input type="checkbox" name="channel_sms"> Text</label>
-              <label><input type="checkbox" name="channel_app"> App (soon)</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="btn-row" style="margin-top:14px">
-        <button class="btn primary" type="button" id="saveAll">Save preferences</button>
-      </div>
-      <div id="msg2"></div>
-    </section>
-
-    <footer>
-      <div class="bar">Jonathan Biron | The Initiative | Creek at the Crossroads | Stilled | Friday Conversations</div>
-    </footer>
+    <p class="footer">Jonathan Biron | The Initiative | Creek at the Crossroads | Stilled</p>
   </div>
 
   <script>
-    const FORM_SECRET = 'REPLACE_WITH_FORM_SECRET';
+    // scroll-activated highlight
+    const sparks = [...document.querySelectorAll('.spark')];
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('is-active'); }
+      })
+    }, {threshold: 0.6});
+    sparks.forEach(s=>io.observe(s));
 
-    function payload(includePrefs){
-      const f = document;
-      const channels=[];
-      if (f.querySelector('input[name="channel_email"]')?.checked) channels.push('email');
-      if (f.querySelector('input[name="channel_sms"]')?.checked) channels.push('sms');
-      if (f.querySelector('input[name="channel_app"]')?.checked) channels.push('app');
-
-      const prefs = includePrefs ? {
-        thrive_invites:   !!f.querySelector('input[name="thrive_invites"]')?.checked,
-        friday_reminders: !!f.querySelector('input[name="friday_reminders"]')?.checked,
-        updates:          !!f.querySelector('input[name="updates"]')?.checked,
-        real_insights:    !!f.querySelector('input[name="real_insights"]')?.checked,
-        frequency:        f.querySelector('select[name="frequency"]')?.value || 'invites_only',
-        channels
-      } : undefined;
-
-      return {
-        first: f.getElementById('first').value.trim(),
-        last:  f.getElementById('last').value.trim(),
-        email: f.getElementById('email').value.trim(),
-        phone: f.getElementById('phone').value.trim(),
-        honeypot: f.getElementById('company').value || '',
-        source:'hub',
-        prefs
-      };
-    }
-
-    async function submit(data){
-      const res = await fetch('/api/submit',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','X-Form-Secret':FORM_SECRET},
-        body:JSON.stringify(data)
-      });
-      let json = {};
-      try { json = await res.json(); } catch {}
-      return { ok: res.ok && json.ok, status: res.status };
-    }
-
-    const form = document.getElementById('mainForm');
-    const msg  = document.getElementById('msg');
-    const msg2 = document.getElementById('msg2');
+    // supabase form → serverless
+    const form = document.getElementById('contact-form');
+    const statusEl = document.getElementById('status');
+    const btn = document.getElementById('send-btn');
 
     form.addEventListener('submit', async (e)=>{
       e.preventDefault();
-      msg.innerHTML='';
-      const { ok, status } = await submit(payload(false));
-      msg.innerHTML = ok
-        ? '<div class="alert ok">Thanks—your contact is saved. You can set preferences below anytime.</div>'
-        : `<div class="alert err">Something went wrong (${status}). Please check fields and try again.</div>`;
-    });
-
-    document.getElementById('saveAll').addEventListener('click', async ()=>{
-      msg2.innerHTML='';
-      const { ok, status } = await submit(payload(true));
-      msg2.innerHTML = ok
-        ? '<div class="alert ok">Preferences saved. You can update them anytime.</div>'
-        : `<div class="alert err">Couldn’t save (${status}). Please try again.</div>`;
+      const data = Object.fromEntries(new FormData(form));
+      btn.disabled = true; statusEl.textContent = 'Sending…';
+      try{
+        const r = await fetch('/api/submit', {
+          method:'POST',
+          headers:{'Content-Type':'application/json','x-form-secret': (window.FORM_SECRET||'')},
+          body: JSON.stringify(data)
+        });
+        if(!r.ok){ throw new Error('Server'); }
+        const j = await r.json();
+        statusEl.textContent = 'Thanks!'; statusEl.style.color = getComputedStyle(document.documentElement).getPropertyValue('--success');
+        form.reset();
+      }catch(err){
+        statusEl.textContent = 'Something went wrong. Please try again.';
+      }finally{
+        btn.disabled = false;
+      }
     });
   </script>
 </body>
