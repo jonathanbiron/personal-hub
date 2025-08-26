@@ -2,265 +2,451 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jonathan Biron — Personal Hub</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jonathan Biron — Welcome</title>
+  <meta name="description" content="Simple rhythms for a fuller life—conversations, gatherings, and practical steps. Choose what you want to hear about." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --midnight:#0B1020;        /* deep base */
-      --ink:#0F172A;             /* near-black text on light */
-      --indigo-1:#10142B;        /* gradient stop */
-      --indigo-2:#1A2454;        /* gradient stop */
-      --ember:#FF7A2F;           /* primary accent */
-      --ember-2:#F5A25C;         /* warm secondary */
-      --sand:#E7E3DA;            /* soft light text */
-      --cloud:#B8C0CC;           /* muted */
-      --glass: rgba(255,255,255,0.04);
-      --radius: 18px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --maxw: 1100px;
+      --bg:#0b0c12;
+      --bg2:#12131a;
+      --ink:#e9e9ed;
+      --muted:#a8acb6;
+      --line:#232533;
+      --ember:#ff8a3c;
+      --ember-2:#ffb86b;
+      --vio:#a987ff;
+      --vio-2:#6f79ff;
+      --max:1120px;
+      --radius:18px;
+      --soft:28px;
+      --shadow:0 20px 60px rgba(0,0,0,.45);
     }
-    /* Page background with subtle spotlight that follows scroll */
+    *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color: var(--sand);
-      background: radial-gradient(1200px 700px at 50% 0%, #182142 0%, var(--midnight) 55%),
-                  linear-gradient(180deg, var(--indigo-1), var(--midnight));
-      background-attachment: fixed;
-      overflow-x:hidden;
+      color:var(--ink);
+      font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;
+      background:
+        radial-gradient(1200px 600px at 70% -10%, #1a1624 0%, transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, #131723 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      background-attachment: fixed, fixed, fixed;
       letter-spacing:.2px;
     }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    header.nav{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
+      background:linear-gradient(180deg,rgba(10,10,14,.6),rgba(10,10,14,.2));
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .nav .inner{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{font-weight:800; letter-spacing:.4px}
+    .navlinks{display:flex; gap:18px; color:var(--muted); font-weight:500; font-size:.95rem}
+    .cta{display:flex; gap:10px}
+    .btn{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--ink); padding:10px 14px; border-radius:14px; font-weight:600;
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--ember),var(--ember-2));
+      color:#111; border:none;
+      box-shadow:0 8px 20px rgba(255,138,60,.25);
+    }
 
-    /* Global layout */
-    .container{width:100%; max-width:var(--maxw); margin:0 auto; padding: 0 24px}
-    section{position:relative; padding: 96px 0}
-    .stack{display:flex; flex-direction:column; gap:18px}
+    section{position:relative;}
+    .hero{
+      min-height:86svh; display:grid; place-items:center; text-align:center;
+    }
+    .hero h1{
+      font-size:clamp(40px,7vw,78px); margin:0 0 14px; line-height:1.02; font-weight:800;
+      letter-spacing:-.5px;
+      background:linear-gradient(135deg,#f0f1f5 0%, #dcdde5 40%, #b6b8c5 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .hero p{max-width:820px; color:var(--muted); margin:0 auto 22px; font-size:1.1rem}
+    .glow{
+      position:absolute; inset:auto -10% -25% -10%; height:380px; filter:blur(50px);
+      background:radial-gradient(600px 240px at 50% 0%, rgba(255,138,60,.28), transparent 60%);
+      pointer-events:none;
+    }
+    .row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
 
-    /* Borderless section header with spotlight word */
-    .eyebrow{color:var(--cloud); text-transform:uppercase; letter-spacing:.18em; font-size:.78rem; font-weight:600}
-    h1,h2{line-height:1.08; margin:0}
-    h1{font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight:800}
-    h2{font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight:800}
-    .lede{font-size: clamp(1.05rem, 1.7vw, 1.25rem); color:#D9DEE8; max-width:70ch}
+    .showcase{padding:40px 0 20px}
+    .cards{position:relative; height:420px; max-width:980px; margin:0 auto}
+    .card{
+      position:absolute; width:60%; max-width:560px; aspect-ratio:16/10; border-radius:22px;
+      background:linear-gradient(180deg,#171925,#141621);
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:var(--shadow); overflow:hidden;
+    }
+    .card:before{
+      content:""; position:absolute; inset:0;
+      background:radial-gradient(100% 100% at 0% 0%, rgba(255,138,60,.12), transparent 50%);
+      pointer-events:none;
+    }
+    .card h3{margin:18px; font-weight:700}
+    .card p{margin:0 18px 18px; color:#b8bdc7}
+    .card.one{left:0; top:24px}
+    .card.two{right:0; top:98px}
 
-    .spot{background: linear-gradient(90deg, var(--ember), var(--ember-2));
-          -webkit-background-clip:text; background-clip:text; color: transparent;
-          filter: saturate(0.5) brightness(0.6);
-          transition: filter .5s ease, text-shadow .5s ease}
-    .spot.active{filter: saturate(1) brightness(1.05); text-shadow: 0 0 18px rgba(255,122,47,.24)}
+    .chips{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; padding:40px 0 20px}
+    .chip{
+      padding:8px 12px; border-radius:999px; font-weight:600; color:#cfd2db;
+      border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.03)
+    }
 
-    /* Buttons */
-    .row{display:flex; gap:12px; flex-wrap:wrap}
-    .btn{appearance:none; border:none; cursor:pointer; border-radius: 999px; padding:14px 18px; font-weight:700; letter-spacing:.2px}
-    .btn.primary{color:#0c0f1c; background: linear-gradient(90deg, var(--ember), var(--ember-2)); box-shadow: 0 12px 30px rgba(255,122,47,.19)}
-    .btn.ghost{color:#E2E8F0; background: transparent; border:1px solid rgba(255,255,255,.12)}
+    .stat{padding:120px 0 20px}
+    .stat .num{
+      position:absolute; inset:auto 0 0 0; top:-60px; height:240px;
+      font-size:clamp(120px, 26vw, 320px); font-weight:800; letter-spacing:-6px;
+      line-height:.8; color:rgba(255,255,255,.03); text-align:center; pointer-events:none;
+    }
+    .stat .box{max-width:860px; margin:0 auto; text-align:center}
+    .stat h2{font-size:clamp(30px,4.4vw,56px); margin:0 0 10px}
+    .stat .em{
+      background:linear-gradient(90deg, var(--ember), var(--vio));
+      -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:800;
+    }
+    .stat p{color:var(--muted); margin:6px 0 0}
 
-    /* Glass blocks without visible borders */
-    .glass{background: var(--glass); backdrop-filter: blur(10px); border-radius: var(--radius); box-shadow: var(--shadow)}
-    .pad{padding:24px}
+    .problem{padding:80px 0 10px; text-align:center}
+    .stack{display:grid; gap:8px; font-size:clamp(22px,2.6vw,30px); font-weight:700; color:#cbd0da}
+    .spark{background:linear-gradient(90deg,#bfc3d1 0%, #fff 50%, #bfc3d1 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent}
 
-    /* Hero */
-    .hero{padding-top: 120px}
-    .hero-inner{display:grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items:center}
-    .avatar{width:108px;height:108px;border-radius: 20px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.08)}
-    .avatar img{width:100%; height:100%; object-fit:cover}
+    .rail{padding:120px 0 40px}
+    .rail .inner{display:grid; gap:28px; grid-template-columns: 1.1fr .9fr; align-items:center}
+    .rail:nth-child(even) .inner{grid-template-columns:.9fr 1.1fr}
+    .rail .vis{
+      height:360px; border-radius:22px; background:
+        linear-gradient(180deg,#171925,#141621);
+      border:1px solid rgba(255,255,255,.06); box-shadow:var(--shadow);
+      position:relative; overflow:hidden;
+    }
+    .rail .vis:after{
+      content:""; position:absolute; inset:-30% -10% auto -10%; height:300px;
+      background:radial-gradient(60% 40% at 20% 0%, rgba(255,138,60,.18), transparent 60%);
+      filter:blur(26px);
+    }
+    .rail h3{font-size:clamp(26px,3vw,36px); margin:0 0 8px; letter-spacing:-.2px}
+    .rail p{color:var(--muted); margin:0 0 12px}
+    .bullets{display:flex; gap:14px; flex-wrap:wrap}
+    .pill{border:1px solid rgba(255,255,255,.1); padding:6px 10px; border-radius:999px; color:#c9ced9; font-weight:600; font-size:.9rem}
+    .rail .cta{margin-top:10px}
 
-    /* Save contact + Share info side-by-side with no hard borders */
-    .two{display:grid; grid-template-columns: 1fr 1fr; gap:20px}
+    .form{padding:100px 0 80px}
+    .panel{
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:26px; box-shadow:var(--shadow);
+      max-width:880px; margin:0 auto;
+    }
+    .form h4{margin:0 0 14px; font-size:1.4rem}
+    .grid{display:grid; gap:12px; grid-template-columns:1fr 1fr}
+    .grid .full{grid-column:1 / -1}
+    input,button,select{
+      font:inherit; padding:12px 14px; border-radius:14px; border:1px solid var(--line);
+      background:rgba(255,255,255,.03); color:var(--ink);
+    }
+    input::placeholder{color:#9096a3}
+    .notice{color:#8f95a3; font-size:.9rem}
+    .bad{color:#ff9b8c}
+    .ok{color:#83f8b6}
 
-    /* Form */
-    form{display:grid; gap:12px}
-    label{font-size:.9rem; color:#c7cfdb}
-    .input{width:100%; border:none; background: rgba(255,255,255,.06); color:#F1F5F9; padding:14px 14px; border-radius: 12px; outline:none}
-    .input::placeholder{color:#9aa5b3}
+    footer{border-top:1px solid rgba(255,255,255,.06); color:#b8bdc7; padding:24px 0; text-align:center}
 
-    /* Long scroll feature sections */
-    .feature{display:grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items:center}
-    .feature .visual{min-height:240px; border-radius: 26px; background:
-        radial-gradient(500px 220px at 60% 30%, rgba(255,122,47,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow: var(--shadow); position:relative; overflow:hidden}
-    .tag{display:inline-block; font-size:.8rem; color:#0c0f1c; background: linear-gradient(90deg, var(--ember), var(--ember-2)); border-radius: 999px; padding:6px 10px; font-weight:800}
-
-    /* Section separators as soft fades instead of lines */
-    .fade{position:absolute; left:0; right:0; height:120px; pointer-events:none}
-    .fade.top{top:0; background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0))}
-    .fade.bot{bottom:0; background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,0))}
-
-    /* Footer */
-    footer{padding: 32px 0 64px; color:#9aa5b3}
-    footer .container{display:flex; justify-content:center}
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .hero-inner,.feature,.two{grid-template-columns: 1fr}
-      .avatar{width:84px;height:84px}
+    @media (max-width:920px){
+      .rail .inner{grid-template-columns:1fr}
+      .cards{height:520px}
+      .card{width:78%}
     }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <div class="container">
-      <div class="hero-inner">
-        <div class="stack">
-          <span class="eyebrow">Quiet mentor • Builder • Neighbor</span>
-          <h1>Hi, I'm <span class="spot" data-spot>Jonathan Biron</span>.</h1>
-          <p class="lede">I convene <span class="spot" data-spot>conversations</span>, host <span class="spot" data-spot>Thrive gatherings</span>, and build connective tissue between people, projects, and place. Come say hi — or jump straight to the next invite.</p>
-          <div class="row">
-            <button class="btn primary" id="saveContact">Save my contact</button>
-            <a class="btn ghost" href="#share">Let's stay in touch</a>
-          </div>
-        </div>
-        <div class="avatar">
-          <!-- Replace this src with your uploaded headshot path in /public/img/headshot.jpg -->
-          <img src="/img/headshot.jpg" alt="Headshot of Jonathan Biron" />
-        </div>
+  <header class="nav">
+    <div class="wrap inner">
+      <div class="brand">Jonathan Biron</div>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="#conversations">Conversations</a>
+        <a href="#thrive">Thrive Gatherings</a>
+        <a href="#initiative">The Initiative</a>
+        <a href="#creek">Creek at the Crossroads</a>
+        <a href="#stilled">Stilled</a>
+      </nav>
+      <div class="cta">
+        <a class="btn" href="#contact">Get Started</a>
+        <a class="btn primary" href="#rsvp">Next Thrive RSVP</a>
       </div>
     </div>
-  </section>
+  </header>
 
-  <section id="share">
-    <div class="container two">
-      <div class="glass pad">
-        <div class="stack">
-          <h2><span class="spot" data-spot>Let's stay in touch</span></h2>
-          <p class="lede">Drop your info and I'll add you to the right invite lists. We keep it useful — no spam, ever.</p>
-          <form id="contactForm" class="stack">
-            <div class="row" style="gap:10px; flex-wrap:nowrap">
-              <input class="input" name="first_name" placeholder="First name" autocomplete="given-name" required>
-              <input class="input" name="last_name" placeholder="Last name" autocomplete="family-name" required>
-            </div>
-            <input class="input" name="email" type="email" placeholder="Email" autocomplete="email" required>
-            <input class="input" name="phone" type="tel" placeholder="Mobile (US)" autocomplete="tel" required>
-            <button class="btn primary" type="submit">Send</button>
-            <div id="formMsg" aria-live="polite" style="min-height:22px; font-size:.95rem; color:#cde3d1"></div>
-          </form>
+  <main>
+    <!-- HERO -->
+    <section class="hero wrap" id="top">
+      <div>
+        <h1>Simple rhythms for a fuller life.</h1>
+        <p>We convene neighbors, founders, and friends—shared meals, thoughtful conversations, and practical steps. Start here and choose what you want to hear about.</p>
+        <div class="row">
+          <a class="btn primary" href="#contact">Get Started</a>
+          <a class="btn" id="rsvp" href="#contact">Next Thrive RSVP</a>
         </div>
       </div>
-      <div class="glass pad">
-        <div class="stack">
-          <h2>What we’re building</h2>
-          <p class="lede">A quick tour of the projects I’m involved in. Tap any card for details later — this page keeps you here.</p>
-          <div class="stack">
-            <div class="feature">
-              <div>
-                <span class="tag">Conversations</span>
-                <h2>We convene <span class="spot" data-spot>neighbors & founders</span></h2>
-                <p class="lede">Weekly <b>Friday Conversations</b> spark collaboration, perspective, and momentum for builders and small businesses.</p>
-              </div>
-              <div class="visual"></div>
-            </div>
-            <div class="feature">
-              <div>
-                <span class="tag">Thrive Gatherings</span>
-                <h2>Monthly, we host <span class="spot" data-spot>easy community</span></h2>
-                <p class="lede">Casual, high‑trust evenings that connect the city. RSVP links live here when a new one goes live.</p>
-              </div>
-              <div class="visual"></div>
-            </div>
-            <div class="feature">
-              <div>
-                <span class="tag">The Initiative</span>
-                <h2>We incubate <span class="spot" data-spot>ventures & ideas</span></h2>
-                <p class="lede">A studio for experiments at the intersection of business, place, and meaning.</p>
-              </div>
-              <div class="visual"></div>
-            </div>
-            <div class="feature">
-              <div>
-                <span class="tag">Creek at the Crossroads</span>
-                <h2>A home base where <span class="spot" data-spot>threads meet</span></h2>
-                <p class="lede">Seven acres for gatherings, making, and slow experiments — the physical crossroads for our work.</p>
-              </div>
-              <div class="visual"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="fade top"></div><div class="fade bot"></div>
-  </section>
+      <div class="glow"></div>
+    </section>
 
-  <section id="notify">
-    <div class="container">
-      <div class="glass pad">
-        <div class="stack">
-          <h2><span class="spot" data-spot>How to hear from us</span></h2>
-          <p class="lede">Pick what and how often. We’ll tailor invites and updates to you.</p>
-          <div class="row">
-            <button class="btn ghost">Events only</button>
-            <button class="btn ghost">Updates only</button>
-            <button class="btn ghost">Events + updates</button>
-          </div>
+    <!-- Overlap showcase -->
+    <section class="showcase wrap">
+      <div class="cards" aria-hidden="true">
+        <div class="card one">
+          <h3>Conversations</h3>
+          <p>Founder-friendly circles for clear thinking and next steps.</p>
+        </div>
+        <div class="card two">
+          <h3>Thrive</h3>
+          <p>Monthly evenings where neighbors become friends.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Community chips -->
+    <section class="wrap">
+      <div class="chips">
+        <div class="chip">Spokane</div>
+        <div class="chip">Inland NW</div>
+        <div class="chip">Small Business</div>
+        <div class="chip">Makers</div>
+        <div class="chip">Faith & Work</div>
+        <div class="chip">Neighbors</div>
+      </div>
+    </section>
+
+    <!-- STAT -->
+    <section class="stat">
+      <div class="num">25%</div>
+      <div class="wrap box">
+        <h2>Leadership can be <span class="em" id="statSpark">lonely</span>.</h2>
+        <p>In a recent HBR survey, <strong>25% of CEOs</strong> reported frequent loneliness and <strong>55%</strong> reported moderate loneliness. Most founders also say entrepreneurship impacts their mental health. Community isn’t a luxury; it’s protective.</p>
+        <p class="notice">Health context: sustained disconnection carries risks comparable to smoking ~15 cigarettes/day.</p>
+      </div>
+    </section>
+
+    <!-- PROBLEM → PROMISE -->
+    <section class="problem wrap">
+      <div class="stack">
+        <div class="spark">We’re busy.</div>
+        <div class="spark">Relationships drift.</div>
+        <div class="spark">Momentum stalls.</div>
+      </div>
+      <div style="height:16px"></div>
+      <div class="stack" aria-label="Our promise">
+        <div>We meet on a simple <span class="em">cadence</span>.</div>
+        <div>We share meals and meaningful <span class="em">work</span>.</div>
+        <div>We choose small <span class="em">steps</span> that compound.</div>
+      </div>
+    </section>
+
+    <!-- RAILS -->
+    <section class="rail wrap" id="conversations">
+      <div class="inner">
+        <div class="vis" aria-hidden="true"></div>
+        <div>
+          <h3>Conversations</h3>
+          <p>We convene conversations that sharpen thinking and lower the volume of noise. Founder-friendly, bias-to-action, and kind by design.</p>
+          <h4 style="margin:12px 0 6px">Friday Conversations</h4>
+          <p>Weekly, 60–90 minutes. A prompt, a round, a takeaway. You’ll leave with clarity and one small next step.</p>
+          <div class="bullets">
+            <span class="pill">Signal over noise</span>
+            <span class="pill">Real peers</span>
+            <span class="pill">Notes + next actions</span>
+          </div>
+          <div class="cta"><a class="btn" href="#contact">Join a session</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rail wrap" id="thrive">
+      <div class="inner">
+        <div>
+          <h3>Thrive Gatherings</h3>
+          <p>A monthly table where neighbors become friends. We set the theme and the on-ramps; you bring what you’re excited to share.</p>
+          <div class="bullets">
+            <span class="pill">Clear theme</span>
+            <span class="pill">Conversation & play</span>
+            <span class="pill">Easy entry for all ages</span>
+          </div>
+          <div class="cta"><a class="btn primary" href="#contact">RSVP for the next Thrive</a></div>
+        </div>
+        <div class="vis" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="rail wrap" id="initiative">
+      <div class="inner">
+        <div class="vis" aria-hidden="true"></div>
+        <div>
+          <h3>The Initiative</h3>
+          <p>Experiments that turn ideas into momentum. We prototype habits, tools, and gatherings that make everyday life work a little better—and share what we learn.</p>
+          <div class="cta"><a class="btn" href="#contact">Explore experiments</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rail wrap" id="creek">
+      <div class="inner">
+        <div>
+          <h3>Creek at the Crossroads</h3>
+          <p>Where place, work, and wonder intersect. Our home base sits where the creek meets the road—literally. A workshop for making, hosting, and slowing down.</p>
+          <div class="cta"><a class="btn" href="#contact">See the space</a></div>
+        </div>
+        <div class="vis" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="rail wrap" id="stilled">
+      <div class="inner">
+        <div class="vis" aria-hidden="true"></div>
+        <div>
+          <h3>Stilled</h3>
+          <p>Practices that slow the hurry so you can hear what matters. We practice first, then tell the story.</p>
+          <div class="cta"><a class="btn" href="#contact">Try a simple practice</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="form" id="contact">
+      <div class="panel">
+        <h4>Let’s stay in touch</h4>
+        <p class="notice">Share your contact; choose what you want to hear about. We’ll send invites and occasional updates. Reply <strong>STOP</strong> to opt out anytime.</p>
+        <form id="contactForm" class="grid" autocomplete="on">
+          <input type="text" id="firstName" name="first_name" placeholder="First name" required />
+          <input type="text" id="lastName" name="last_name" placeholder="Last name" required />
+          <input type="email" id="email" class="full" name="email" placeholder="Email" required />
+          <input type="tel" id="phone" class="full" name="phone" placeholder="Mobile (US) e.g. 509 555-1212" />
+          <div class="full">
+            <label class="notice">Preferences</label>
+            <div class="row" style="justify-content:flex-start">
+              <label><input type="radio" name="pref" value="events" checked /> Events only</label>
+              <label style="margin-left:16px"><input type="radio" name="pref" value="updates" /> Updates only</label>
+              <label style="margin-left:16px"><input type="radio" name="pref" value="both" /> Both (recommended)</label>
+            </div>
+          </div>
+          <button type="submit" class="btn primary full">Send my contact</button>
+          <div id="formMsg" class="notice full" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="container">
-      <div>Jonathan Biron | Initiative | Conversations | Thrive Gatherings | Creek at the Crossroads</div>
-    </div>
+    <div class="wrap">Jonathan Biron | Initiative | Conversations | Thrive Gatherings | Creek at the Crossroads | Stilled</div>
   </footer>
 
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
   <script>
-    /* === Scroll spotlight: activate .spot spans when their section is centered === */
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        const spans = entry.target.querySelectorAll('[data-spot]');
-        spans.forEach(s=> s.classList.toggle('active', entry.isIntersecting));
-      })
-    }, {root:null, threshold: 0.45});
-    document.querySelectorAll('section, .feature').forEach(el=>observer.observe(el));
+    // ====== CONFIG ======
+    const FORM_SECRET = '<PASTE_YOUR_FORM_SECRET_HERE>'; // <-- replace with your existing secret
 
-    /* === Save my contact → generate vCard on the fly === */
-    const VCARD = `BEGIN:VCARD\nVERSION:3.0\nN:Biron;Jonathan;;;\nFN:Jonathan Biron\nTEL;CELL:+18189039078\nEMAIL:jonathan@theinitiativeprojects.com\nEND:VCARD`;
-    document.getElementById('saveContact').addEventListener('click', ()=>{
-      const blob = new Blob([VCARD], {type:'text/vcard'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'JonathanBiron.vcf'; a.click();
-      setTimeout(()=>URL.revokeObjectURL(url), 2000);
-    });
-
-    /* === Form POST → your Vercel /api/submit === */
-    const FORM_SECRET = 'REPLACE_WITH_YOUR_FORM_SECRET'; // keep this in sync with your /api/submit check
-    const form = document.getElementById('contactForm');
-    const msg = document.getElementById('formMsg');
-    form.addEventListener('submit', async (e)=>{
+    // ====== FORM ======
+    const form = document.querySelector('#contactForm');
+    const msg = document.querySelector('#formMsg');
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       msg.textContent = 'Sending…';
-      const fd = new FormData(form);
-      const payload = Object.fromEntries(fd.entries());
-      payload.form_secret = FORM_SECRET;
-      try{
-        const res = await fetch('/api/submit',{
-          method:'POST', headers:{'Content-Type':'application/json'},
+      try {
+        const payload = {
+          first_name: document.querySelector('#firstName').value.trim(),
+          last_name:  document.querySelector('#lastName').value.trim(),
+          email:      document.querySelector('#email').value.trim(),
+          phone:      document.querySelector('#phone').value.trim(),
+          preference: (new FormData(form).get('pref') || 'both')
+        };
+        const res = await fetch('/api/submit', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-form-secret': FORM_SECRET
+          },
           body: JSON.stringify(payload)
         });
-        const data = await res.json().catch(()=>({}));
-        if(res.ok && data.ok){
+        if (!res.ok) throw new Error('Server error');
+        const json = await res.json();
+        if (json.ok) {
+          msg.className = 'notice ok';
           msg.textContent = 'Thanks! You’re on the list.';
           form.reset();
         } else {
-          msg.style.color = '#ffd1d1';
-          msg.textContent = data.error || 'Something went wrong.';
+          msg.className = 'notice bad';
+          msg.textContent = json.error || 'Something went wrong.';
         }
-      }catch(err){
-        msg.style.color = '#ffd1d1';
-        msg.textContent = 'Network error. Try again.';
+      } catch (err) {
+        msg.className = 'notice bad';
+        msg.textContent = 'Could not send right now. Please try again.';
+        console.error(err);
       }
     });
 
-    /* === Subtle background parallax on scroll === */
-    document.addEventListener('scroll', ()=>{
-      const y = window.scrollY;
-      document.body.style.backgroundPosition = `50% ${-y*0.15}px, 0 0`;
-    }, {passive:true});
+    // ====== MOTION (GSAP + ScrollTrigger) ======
+    // Respect reduced motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Pin hero for a moment
+      ScrollTrigger.create({
+        trigger: '.hero',
+        start: 'top top',
+        end: '+=80%',
+        pin: true,
+        pinSpacing: true
+      });
+
+      // Overlapping cards drift
+      gsap.fromTo('.card.one', {y:40, rotate:-2}, {
+        y:0, rotate:0, ease:'power2.out', duration:1.1,
+        scrollTrigger:{ trigger:'.showcase', start:'top 80%', end:'top 20%', scrub:true }
+      });
+      gsap.fromTo('.card.two', {y:120, rotate:3}, {
+        y:0, rotate:0, ease:'power2.out', duration:1.1,
+        scrollTrigger:{ trigger:'.showcase', start:'top 80%', end:'top 20%', scrub:true }
+      });
+
+      // Stat highlight scrub
+      gsap.fromTo('#statSpark', {opacity:.6}, {
+        opacity:1, ease:'none',
+        scrollTrigger:{ trigger:'.stat', start:'top 75%', end:'top 20%', scrub:true }
+      });
+
+      // Problem lines shimmer
+      gsap.utils.toArray('.spark').forEach((el,i)=>{
+        gsap.fromTo(el,{opacity:.4,y:10},{opacity:1,y:0,duration:.6,delay:i*.1,
+          scrollTrigger:{trigger:'.problem', start:'top 70%'}});
+      });
+
+      // Feature rails: slide/Pin lite
+      gsap.utils.toArray('.rail').forEach((sec, idx) => {
+        const vis = sec.querySelector('.vis');
+        gsap.fromTo(vis, {y:24, opacity:.6}, {
+          y:0, opacity:1, duration:.8, ease:'power2.out',
+          scrollTrigger:{ trigger:sec, start:'top 70%' }
+        });
+        // subtle pin feel
+        ScrollTrigger.create({
+          trigger: sec,
+          start: 'top center',
+          end: 'bottom top+=20%',
+          onEnter: () => gsap.to(sec, {y:-6, duration:.6, ease:'power1.out'}),
+          onLeaveBack: () => gsap.to(sec, {y:0, duration:.6, ease:'power1.out'})
+        });
+      });
+    }
   </script>
 </body>
 </html>
